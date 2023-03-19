@@ -1,0 +1,97 @@
+spring:
+  application:
+    name: lottery-quick-login-demo-api
+  profiles:
+    active: 'local'
+  main:
+    web-application-type: reactive
+  webflux:
+    base-path: '/'
+#  cloud:
+#    consul:
+#      host: 127.0.0.1
+#      port: 8500
+#      discovery:
+#        service-name: '${spring.application.name}'
+#        healthCheckPath: '${spring.webflux.base-path}actuator/info'
+#        healthCheckInterval: 10s
+#        heartbeat:
+#          ttl: 3s
+#        prefer-ip-address: true
+#        enabled: true
+#        instance-id: '${spring.application.name}:${server.port}'
+#    openfeign:
+#      client:
+#        config:
+#          LOTTERY-HALL-LOGIN-AGENT-API: #不設定URL就是自動load balance by feign name
+#            connectTimeout: 5000
+#            readTimeout: 5000
+#            loggerLevel: full
+
+#            errorDecoder: com.example.SimpleErrorDecoder7
+
+#            retryer: com.example.SimpleRetryer
+#            requestInterceptors:
+#              - com.example.FooRequestInterceptor
+#              - com.example.BarRequestInterceptor
+#            encoder: com.example.SimpleEncoder
+#            decoder: com.example.SimpleDecoder
+#            contract: com.example.SimpleContract
+#resilience4j:
+#  ratelimiter:
+#    instances:
+#      basic:
+#        limitForPeriod: 2
+#        limitRefreshPeriod: 1s
+#        timeoutDuration: 1s
+#  circuitbreaker:
+#    instances:
+#      backend:
+#        registerHealthIndicator: true
+#        slidingWindowSize: 10
+#        permittedNumberOfCallsInHalfOpenState: 5
+#        waitDurationInOpenState: 1
+#        failureRateThreshold: 50
+#  Bulkhead:
+#    instances:
+#      basic1:
+#        maxConcurrentCalls: 10 #同時併發數量限制
+#        maxWaitDuration: 1 #等待時間一秒
+#afb:
+#  url: https://cs-awsyfag.gm10099.com/afbapiyflivesw/app/api.do
+#  hashCode: quickLoginTest_ce35e773-ddd1-42b2-99
+server:
+  port: 8800
+#com:
+#  alliance:
+#    lottery:
+#      fast-login:
+#        api-para:
+#          language: CNY
+
+## 有用eureka discover要加這個
+## application name統一用大寫
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include:
+#          - info
+#          - health
+#      base-path: '/actuator'
+
+# eureka has many bug
+#eureka:
+#  instance:
+#    metadata-map:
+#      weight: 1
+#    status-page-url-path: ${spring.webflux.base-path}/${management.endpoints.web.base-path}/info
+#    health-check-url: ${spring.webflux.base-path}/${management.endpoints.web.base-path}/health
+#    instance-id:
+#    appname: 'QUICK-START-LOGIN-SVR'
+#    prefer-ip-address: true
+
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: 'http://172.18.38.139:8761/eureka/,http://172.18.38.139:8762/eureka/'

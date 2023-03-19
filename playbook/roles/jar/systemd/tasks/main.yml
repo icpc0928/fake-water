@@ -1,0 +1,106 @@
+---
+
+- name: check wildfly is still live
+  ansible.builtin.shell:
+    cmd: 'echo "hostname is " $(hostname)'
+  register: hostname_out
+- debug: var=hostname_out.stdout
+
+- name: add maven fact
+  set_fact:
+    maven_target: "{{hostvars['localhost']['maven_target']}}"
+    jar_name: "{{hostvars['localhost']['jar_name']}}"
+
+- name: show variables
+  shell: 'echo update server now today is  $(date +"%Y%m%d%H%M%S") {{ spring_boot_home }} maven_target {{ maven_target }}'
+  register: echo_var_workable
+- debug: var=echo_var_workable.stdout
+
+- name: stop systemd
+  environment:
+    JAVA_HOME: '{{ java_home }}'
+  ansible.builtin.shell:
+    cmd: "systemctl stop {{systemd_name}}"
+  register: restart_result
+  ignore_errors: yes
+  become: yes
+
+- name: Pause for 3 seconds to stop the wildfly
+  pause:
+    seconds: 2
+
+- name: force kill if server is still alive
+  ansible.builtin.shell:
+    chdir: "{{ spring_boot_home }}"
+    cmd: "kill -9 $(cat application.pid)"
+  register: isDead
+  ignore_errors: yes
+- debug: var=isDead.stdout
+
+- name: create a back-up jar folder
+  ansible.builtin.file:
+    path: '{{ back_up_folder}}'
+    state: directory
+    mode: '0755'
+
+- name: Check jar exist
+  stat:
+    path: "{{ spring_boot_home }}/{{jar_name}}"
+  register: old_war
+- debug: var=old_war
+
+- name: back up old jar folder
+  ansible.builtin.shell:
+    chdir: "{{ spring_boot_home }}"
+    cmd: 'mv {{jar_name}} {{back_up_folder}}/{{jar_name}}_$(date +"%Y%m%d%H%M%S")'
+  when: old_war.stat.exists
+  ignore_errors: yes
+
+- name: delete backup file more than one hours ago
+  ansible.builtin.shell:
+    chdir: '{{ back_up_folder }}'
+    cmd: find . -maxdepth 1  -cmin  +60  | xargs  rm -rf
+  when: old_war.stat.exists
+  ignore_errors: yes
+
+
+- name: create a ori jar folder
+  ansible.builtin.file:
+    path: '{{spring_boot_home}}/../current_jar'
+    state: directory
+    mode: '0755'
+
+- name: Create a logs folder if it does not exist
+  ansible.builtin.file:
+    path: "{{spring_boot_home}}/logs"
+    state: directory
+    mode: '0755'
+
+- name: sync  jar folder
+  synchronize:
+    src: "{{ maven_target }}/{{jar_name}}"
+    dest: '{{spring_boot_home}}/../current_jar/{{jar_name}}'
+    delete: yes
+
+- name: copy jar folder
+  copy:
+    src: "{{spring_boot_home}}/../current_jar/{{jar_name}}"
+    dest: "{{ spring_boot_home }}/{{jar_name}}"
+    remote_src: yes
+    mode: '0644'
+
+- name: start systemd
+  environment:
+    JAVA_HOME: '{{ java_home }}'
+  ansible.builtin.shell:
+    cmd: "systemctl start {{systemd_name}}"
+  become: yes
+
+- name: check app whether is work?
+  environment:
+    JAVA_HOME: '{{ java_home }}'
+  ansible.builtin.shell:
+    cmd: "systemctl status {{systemd_name}}"
+  register: isAppRun
+  become: yes
+- debug: var=isAppRun.stdout

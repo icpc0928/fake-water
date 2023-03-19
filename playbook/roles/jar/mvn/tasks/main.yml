@@ -1,0 +1,17 @@
+---
+
+- name: get maven target folder path
+  shell: cd $(pwd)/../target && pwd
+  register: maven_target_out
+- debug: var=maven_target_out
+- name: add maven factor to localhost
+  set_fact:
+    maven_target: '{{ maven_target_out.stdout }}'
+- debug: var=maven_target
+- name: get jar
+  shell: cd $(pwd)/../target && ls -l | grep .jar|  ls -1  | grep .jar | head -n 1
+  register: find_jar_name
+- name: add jar name as factor
+  set_fact:
+    jar_name: '{{ find_jar_name.stdout }}'
+- debug: var=find_jar_name

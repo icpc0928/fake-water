@@ -1,0 +1,15 @@
+---
+
+- hosts: localhost
+  roles:
+    - role: 'jar/mvn'
+
+- hosts: SIT
+  roles:
+    - role: 'jar/systemd'
+      vars:
+        spring_boot_home: /home/kg/quick-login
+        java_home: /home/kg/.sdkman/candidates/java/17.0.5-amzn
+        back_up_folder: /home/kg/old_jar
+        systemd_name: quick-login
+

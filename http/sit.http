@@ -1,0 +1,15 @@
+## 快速登入 (只能在瀏覽器上執行)
+GET http://csyf-vdn-login.gm10099.com/fastLogin/getLoginUrl
+
+
+
+### 大廳登入
+POST http://kgsit-sscapi.kgtests.com/fastLogin/hall-login/CNY
+Content-Type: application/json
+
+### 大廳登入 (IDR)
+POST http://kgsit-sscapi.kgtests.com/fastLogin/hall-login/IDR
+Content-Type: application/json
+
+### 傳統彩登入
+POST http://kgsit-sscapi.kgtests.com/fastLogin/get-lotto-url/CNY

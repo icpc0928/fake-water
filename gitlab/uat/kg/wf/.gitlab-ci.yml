@@ -1,0 +1,25 @@
+variables:
+  PROJECT_TITLE: "$CI_PROJECT_TITLE"
+
+
+
+
+kg-wf-uat-job: # This job runs in the build stage, which runs first.
+  stage: build-and-deploy
+  variables:
+    JAVA_HOME: "/home/gitlab-runner/.sdkman/candidates/java/17.0.6-tem/"
+    ANSIBLE_INVENTORY: "inventory/kg/wf/sit"
+    ANSIBLE_FILE: "kg.yml"
+  tags:
+    - kg-uat
+  script:
+    - cd server
+    - echo "一般快速登入, $GITLAB_USER_LOGIN!"
+    - echo "正在部屬:" $PROJECT_TITLE
+    - mvn clean package -T 1  -DskipTests=true
+    - pwd
+    - cd playbook
+    - ansible-playbook -i $ANSIBLE_INVENTORY $ANSIBLE_FILE
+
+  only:
+    - UAT
