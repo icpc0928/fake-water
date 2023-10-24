@@ -741,3 +741,38 @@ Original Stack Trace:
 		at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
 		at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 		at java.base/java.lang.Thread.run(Thread.java:833)
+2023-10-24 09:50:26 INFO [restartedMain] c.a.game.fakeWater.Application - Starting Application using Java 17.0.8 with PID 15456 (C:\Users\LeoAlliance\IdeaProjects\Leos\Fake-water\target\classes started by LeoAlliance in C:\Users\LeoAlliance\IdeaProjects\Leos\Fake-water)
+2023-10-24 09:50:26 INFO [restartedMain] c.a.game.fakeWater.Application - The following 1 profile is active: "local"
+2023-10-24 09:50:26 INFO [restartedMain] o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-10-24 09:50:26 INFO [restartedMain] o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-10-24 09:50:27 INFO [restartedMain] o.s.cloud.context.scope.GenericScope - BeanFactory id=fd60112e-3295-3ee3-90e5-6a0e61a8a8ef
+2023-10-24 09:50:27 INFO [restartedMain] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-10-24 09:50:27 INFO [restartedMain] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-10-24 09:50:27 INFO [restartedMain] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-10-24 09:50:27 INFO [restartedMain] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8800 (http)
+2023-10-24 09:50:27 INFO [restartedMain] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8800"]
+2023-10-24 09:50:27 INFO [restartedMain] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-10-24 09:50:27 INFO [restartedMain] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-10-24 09:50:28 INFO [restartedMain] o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-10-24 09:50:28 INFO [restartedMain] o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-10-24 09:50:28 INFO [restartedMain] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8800"]
+2023-10-24 09:50:28 INFO [restartedMain] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8800 (http) with context path ''
+2023-10-24 09:50:28 INFO [restartedMain] c.a.game.fakeWater.Application - Started Application in 3.469 seconds (process running for 6.568)
+2023-10-24 11:20:28 INFO [restartedMain] c.a.game.fakeWater.Application - Starting Application using Java 17.0.8 with PID 15604 (C:\Users\LeoAlliance\IdeaProjects\Leos\Fake-water\target\classes started by LeoAlliance in C:\Users\LeoAlliance\IdeaProjects\Leos\Fake-water)
+2023-10-24 11:20:28 INFO [restartedMain] c.a.game.fakeWater.Application - The following 1 profile is active: "local"
+2023-10-24 11:20:28 INFO [restartedMain] o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-10-24 11:20:28 INFO [restartedMain] o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-10-24 11:20:29 INFO [restartedMain] o.s.cloud.context.scope.GenericScope - BeanFactory id=fd60112e-3295-3ee3-90e5-6a0e61a8a8ef
+2023-10-24 11:20:29 INFO [restartedMain] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-10-24 11:20:29 INFO [restartedMain] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig' of type [org.springframework.cloud.client.loadbalancer.reactive.LoadBalancerBeanPostProcessorAutoConfiguration$ReactorDeferringLoadBalancerFilterConfig] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-10-24 11:20:29 INFO [restartedMain] o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'reactorDeferringLoadBalancerExchangeFilterFunction' of type [org.springframework.cloud.client.loadbalancer.reactive.DeferringLoadBalancerExchangeFilterFunction] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-10-24 11:20:29 INFO [restartedMain] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8800 (http)
+2023-10-24 11:20:29 INFO [restartedMain] o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8800"]
+2023-10-24 11:20:29 INFO [restartedMain] o.a.catalina.core.StandardService - Starting service [Tomcat]
+2023-10-24 11:20:29 INFO [restartedMain] o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-10-24 11:20:30 INFO [restartedMain] o.s.b.a.e.web.EndpointLinksResolver - Exposing 1 endpoint(s) beneath base path '/actuator'
+2023-10-24 11:20:30 INFO [restartedMain] o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2023-10-24 11:20:30 INFO [restartedMain] o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8800"]
+2023-10-24 11:20:30 INFO [restartedMain] o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port(s): 8800 (http) with context path ''
+2023-10-24 11:20:30 INFO [restartedMain] c.a.game.fakeWater.Application - Started Application in 2.634 seconds (process running for 3.553)
+2023-10-24 11:22:10 WARN [http-nio-8800-exec-6] o.s.c.LocalVariableTableParameterNameDiscoverer - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.alliance.game.fakeWater.adaptor.WebAdapter

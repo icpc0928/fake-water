@@ -1,6 +1,7 @@
 package com.alliance.game.fakeWater.app.service.impl;
 
 import com.alliance.game.fakeWater.app.dto.LotteryResultDto;
+import com.alliance.game.fakeWater.domain.ManualTimer;
 import com.alliance.game.fakeWater.domain.Sha256;
 import com.alliance.game.fakeWater.domain.Timer;
 import com.alliance.game.fakeWater.domain.enums.LotteryType;
@@ -15,6 +16,8 @@ public class LotteryResultService {
 
     //每次回傳的期數都給50期
     private final int defaultSeqNum = 50;
+    //每次回傳的期數都給5期
+    private final int defaultManualSeqNul = 5;
 
 
     public List<LotteryResultDto> getResultList(String lotteryType) {
@@ -25,6 +28,7 @@ public class LotteryResultService {
             case KENO_90 -> getKenosResult(lotteryType1, 90);
             case KENO_180 -> getKenosResult(lotteryType1, 180);
             case KENO_300, KENO_CAN_300, KENO_SVK_300 -> getKenosResult(lotteryType1, 300);
+            case FD_DAMA, FD_TOTO, FD_MAGNUM -> getFDDamaResult(lotteryType1);
             default -> null;
         };
     }
@@ -55,6 +59,25 @@ public class LotteryResultService {
             String openDate = Timer.getOpenDateString(roundTime, nowGameSeq);
             LotteryResultDto dto = new LotteryResultDto(String.valueOf(nowGameSeq),
                     openDate, resultListToStr(list), lotteryType.name(), String.valueOf(nowGameSeq));
+            result.add(dto);
+        }
+        return result;
+    }
+
+
+    private List<LotteryResultDto> getFDDamaResult(LotteryType lotteryType){
+        List<LotteryResultDto> result = new ArrayList<>();
+        LocalDateTime localDateTime = LocalDateTime.now();
+        //取得當下期號
+        long gameSeq = ManualTimer.getGameSeq(lotteryType, localDateTime);
+
+        for(int i = 0; i < defaultManualSeqNul; i++){
+            long nowGameSeq = gameSeq - i;
+            String base = nowGameSeq + lotteryType.name();
+            var oneResult = Sha256.getResultCanRepeat(base, 4, 0, 9);
+            var openDate = ManualTimer.getOpenDate(lotteryType, nowGameSeq);
+            if(openDate == null) continue;
+            LotteryResultDto dto = new LotteryResultDto(String.valueOf(nowGameSeq), openDate.toString(), resultListToStr(oneResult), lotteryType.name(), String.valueOf(nowGameSeq));
             result.add(dto);
         }
         return result;
