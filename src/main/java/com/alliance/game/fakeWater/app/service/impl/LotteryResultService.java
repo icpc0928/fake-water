@@ -1,13 +1,18 @@
 package com.alliance.game.fakeWater.app.service.impl;
 
+import com.alliance.game.fakeWater.app.dto.FdSgpResultDto;
 import com.alliance.game.fakeWater.app.dto.LotteryResultDto;
 import com.alliance.game.fakeWater.domain.ManualTimer;
 import com.alliance.game.fakeWater.domain.Sha256;
 import com.alliance.game.fakeWater.domain.Timer;
 import com.alliance.game.fakeWater.domain.enums.LotteryType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +24,18 @@ public class LotteryResultService {
     //每次回傳的期數都給5期
     private final int defaultManualSeqNul = 5;
 
+    private static final Logger logger = LoggerFactory.getLogger(LotteryResultService.class);
+
+
+    public List<FdSgpResultDto> getFdResultList(String lotteryType){
+        LotteryType lotteryType1 = LotteryType.getLotteryType(lotteryType);
+        if(lotteryType1 == null) return null;
+        return switch (lotteryType1){
+
+            case FD_DAMA, FD_TOTO, FD_MAGNUM -> getFDDamaResult(lotteryType1);
+            default -> null;
+        };
+    }
 
     public List<LotteryResultDto> getResultList(String lotteryType) {
         LotteryType lotteryType1 = LotteryType.getLotteryType(lotteryType);
@@ -28,7 +45,7 @@ public class LotteryResultService {
             case KENO_90 -> getKenosResult(lotteryType1, 90);
             case KENO_180 -> getKenosResult(lotteryType1, 180);
             case KENO_300, KENO_CAN_300, KENO_SVK_300 -> getKenosResult(lotteryType1, 300);
-            case FD_DAMA, FD_TOTO, FD_MAGNUM -> getFDDamaResult(lotteryType1);
+//            case FD_DAMA, FD_TOTO, FD_MAGNUM -> getFDDamaResult(lotteryType1);
             default -> null;
         };
     }
@@ -65,8 +82,9 @@ public class LotteryResultService {
     }
 
 
-    private List<LotteryResultDto> getFDDamaResult(LotteryType lotteryType){
-        List<LotteryResultDto> result = new ArrayList<>();
+    private List<FdSgpResultDto> getFDDamaResult(LotteryType lotteryType){
+        logger.info("get FD_DAMA result");
+        List<FdSgpResultDto> result = new ArrayList<>();
         LocalDateTime localDateTime = LocalDateTime.now();
         //取得當下期號
         long gameSeq = ManualTimer.getGameSeq(lotteryType, localDateTime);
@@ -76,8 +94,11 @@ public class LotteryResultService {
             String base = nowGameSeq + lotteryType.name();
             var oneResult = Sha256.getResultCanRepeat(base, 4, 0, 9);
             var openDate = ManualTimer.getOpenDate(lotteryType, nowGameSeq);
+
             if(openDate == null) continue;
-            LotteryResultDto dto = new LotteryResultDto(String.valueOf(nowGameSeq), openDate.toString(), resultListToStr(oneResult), lotteryType.name(), String.valueOf(nowGameSeq));
+            ZonedDateTime zdt = ZonedDateTime.of(openDate, ZoneId.systemDefault());
+            long date = zdt.toInstant().toEpochMilli();
+            FdSgpResultDto dto = new FdSgpResultDto(lotteryType, String.valueOf(nowGameSeq), oneResult, date);
             result.add(dto);
         }
         return result;

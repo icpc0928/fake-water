@@ -1,6 +1,7 @@
 package com.alliance.game.fakeWater.adaptor;
 
 
+import com.alliance.game.fakeWater.app.dto.FdSgpResultDto;
 import com.alliance.game.fakeWater.app.dto.LotteryResultDto;
 
 import com.alliance.game.fakeWater.app.service.impl.LotteryResultService;
@@ -51,10 +52,16 @@ public class WebAdapter {
 //                .map((a) -> quickLoginStrategy.loginHall(Currency.getCurrencyByName(currency)));
 //    }
 
+//    @GetMapping(value = "{lotteryType}")
+//    public Mono<List<LotteryResultDto>> getLotteryResult(ServerHttpResponse response, @PathVariable String lotteryType){
+//        return Mono.just(response).publishOn(hallBoundElastic)
+//                .map((a) -> lotteryResultService.getResultList(lotteryType));
+//    }
+
     @GetMapping(value = "{lotteryType}")
-    public Mono<List<LotteryResultDto>> getLotteryResult(ServerHttpResponse response, @PathVariable String lotteryType){
+    public Mono<List<FdSgpResultDto>> getFDDAMAResult(ServerHttpResponse response, @PathVariable String lotteryType){
         return Mono.just(response).publishOn(hallBoundElastic)
-                .map((a) -> lotteryResultService.getResultList(lotteryType));
+                .map((a) -> lotteryResultService.getFdResultList(lotteryType));
     }
 
 

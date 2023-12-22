@@ -597,3 +597,6 @@ Original Stack Trace:
 		at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
 		at java.base/java.lang.Thread.run(Thread.java:833)
 2023-10-24 11:22:10 WARN [http-nio-8800-exec-6] o.s.c.LocalVariableTableParameterNameDiscoverer - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.alliance.game.fakeWater.adaptor.WebAdapter
+2023-10-24 11:49:43 WARN [http-nio-8800-exec-2] o.s.c.LocalVariableTableParameterNameDiscoverer - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.alliance.game.fakeWater.adaptor.WebAdapter
+2023-10-24 14:53:05 WARN [http-nio-8800-exec-1] o.s.c.LocalVariableTableParameterNameDiscoverer - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.alliance.game.fakeWater.adaptor.WebAdapter
+2023-10-24 16:00:36 WARN [http-nio-8800-exec-1] o.s.c.LocalVariableTableParameterNameDiscoverer - Using deprecated '-debug' fallback for parameter name resolution. Compile the affected code with '-parameters' instead or avoid its introspection: com.alliance.game.fakeWater.adaptor.WebAdapter
